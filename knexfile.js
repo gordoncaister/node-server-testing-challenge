@@ -1,5 +1,9 @@
 // Update with your config settings.
-
+const pgConnection = process.env.DATABASE_URL || {
+database: 'projects',
+user:     'postgres',
+password: '0n0mat0p0eia'
+};
 module.exports = {
 
   development: {
@@ -39,11 +43,7 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: {
-      database: 'projects',
-      user:     'postgres',
-      password: '0n0mat0p0eia'
-    },
+    connection: pgConnection,
     pool: {
       min: 2,
       max: 10
