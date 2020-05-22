@@ -8,7 +8,7 @@ server.use(express.json());
 
 
 server.get("/", (req, res) => {
-  res.json({ api: "up" });
+  res.status(200).json({ api: "up" });
 });
 
 server.get("/api/pancakes",(req,res)=>{
@@ -22,7 +22,7 @@ server.get("/api/pancakes",(req,res)=>{
 server.post("/api/pancakes", (req,res)=> {
   db("pancakes")
     .insert(req.body)
-    .then(pancake =>res.status(201).json(pancake))
+    .then(id =>res.status(201).json({id}))
     .catch(e => res.status(500).json({error:"error"}))
 })
 

@@ -25,20 +25,23 @@ module.exports = {
     },
   },
 
-  staging: {
-    client: 'postgresql',
+  testing: {
+    client: "sqlite3",
+    useNullAsDefault: true,
     connection: {
-      database: 'projects',
-      user:     'postgres',
-      password: '0n0mat0p0eia'
+      filename: ":memory:",
     },
     pool: {
-      min: 2,
-      max: 10
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys = ON", done);
+      },
     },
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      directory: "./data/migrations",
+    },
+    seeds: {
+      directory: "./data/seeds",
+    },
   },
 
   production: {
